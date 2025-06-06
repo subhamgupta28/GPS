@@ -7,8 +7,8 @@
 #define RXD2 17
 #define TXD2 18
 
-// const char *HOST = "https://open-sadly-lamprey.ngrok-free.app/";
-// int PORT = 80;
+// const char *HOST = "open-sadly-lamprey.ngrok-free.app";
+// int PORT = 443;
 
 const char *HOST = "raspberry.local";
 int PORT = 8010;
