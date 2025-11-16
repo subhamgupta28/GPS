@@ -3,17 +3,19 @@
 #include <TinyGPS++.h>
 #include <Wire.h>
 #include "TimeLib.h"
+#define USE_HTTPS 1
 
 #define RXD2 17
 #define TXD2 18
 
-// const char *HOST = "open-sadly-lamprey.ngrok-free.app";
-// int PORT = 443;
+const char *HOST = "automata.realsubhamgupta.in";
+int PORT = 443;
 
-const char *HOST = "raspberry.local";
-int PORT = 8010;
+// const char *HOST = "raspberry.local";
+// int PORT = 8010;
 
-Automata automata("GPS", HOST, PORT);
+// Automata automata("GPS", HOST, PORT);
+Automata automata("GPS", HOST, PORT, "0.tcp.in.ngrok.io", 14730);
 Preferences preferences;
 HardwareSerial gpsSerial(1);
 TinyGPSPlus gps;
@@ -67,8 +69,8 @@ void setup()
 static void smartDelay(unsigned long ms)
 {
   unsigned long start = millis();
-while (gpsSerial.available())
-      gps.encode(gpsSerial.read());
+  while (gpsSerial.available())
+    gps.encode(gpsSerial.read());
   // do
   // {
   //   while (gpsSerial.available())
@@ -78,8 +80,7 @@ while (gpsSerial.available())
 
 void loop()
 {
-  Serial.println("loop");
-  automata.loop();
+  // Serial.println("loop");
   smartDelay(20);
   // unsigned long timestamp = now();
 
@@ -99,7 +100,7 @@ void loop()
 
   Serial.println("loop");
 
-  if ((millis() - start2) > 1000)
+  if ((millis() - start2) > 1000 && gps.location.isValid())
   {
     automata.sendLive(doc);
     Serial.println("sent live");
