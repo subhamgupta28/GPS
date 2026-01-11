@@ -15,7 +15,7 @@ int PORT = 443;
 // int PORT = 8010;
 
 // Automata automata("GPS", HOST, PORT);
-Automata automata("GPS", HOST, PORT, "0.tcp.in.ngrok.io", 14730);
+Automata automata("GPS","SENSOR|GPS", HOST, PORT, "0.tcp.in.ngrok.io", 16035);
 Preferences preferences;
 HardwareSerial gpsSerial(1);
 TinyGPSPlus gps;
